@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neon Image Gallery Maker</title>
+    <title>Neon Gallery Maker</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;500;700&family=Montserrat:wght@300;500;700&family=Raleway:wght@300;500;700&family=Poppins:wght@300;500;700&family=Oxanium:wght@300;500;700&family=Audiowide&family=BankGothic&family=Nasalization&family=Kiona&family=Geostar&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;500;700&family=Montserrat:wght@300;500;700&family=Raleway:wght@300;500;700&family=Poppins:wght@300;500;700&family=Oxanium:wght@300;500;700&family=Audiowide&display=swap" rel="stylesheet">
     <style>
         :root {
             --neon-primary: #00f3ff;
@@ -37,14 +37,14 @@
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
         
         header {
             text-align: center;
-            margin-bottom: 40px;
-            padding: 30px;
+            margin-bottom: 30px;
+            padding: 25px;
             background: rgba(10, 12, 28, 0.6);
             border-radius: 16px;
             border: 1px solid var(--neon-primary);
@@ -68,7 +68,7 @@
         
         h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 3.5rem;
+            font-size: 3.2rem;
             font-weight: 900;
             margin-bottom: 15px;
             text-transform: uppercase;
@@ -97,7 +97,7 @@
         
         .controls-section {
             flex: 1;
-            min-width: 300px;
+            min-width: 320px;
             background: var(--card-bg);
             padding: 25px;
             border-radius: 16px;
@@ -107,7 +107,7 @@
         
         .preview-section {
             flex: 2;
-            min-width: 300px;
+            min-width: 320px;
             background: var(--card-bg);
             padding: 25px;
             border-radius: 16px;
@@ -235,10 +235,6 @@
         .font-poppins { font-family: 'Poppins', sans-serif; }
         .font-oxanium { font-family: 'Oxanium', cursive; }
         .font-audiowide { font-family: 'Audiowide', cursive; }
-        .font-bankgothic { font-family: 'BankGothic', sans-serif; }
-        .font-nasalization { font-family: 'Nasalization', sans-serif; }
-        .font-kiona { font-family: 'Kiona', sans-serif; }
-        .font-geostar { font-family: 'Geostar', cursive; }
         
         .gallery-preview {
             margin-top: 30px;
@@ -268,7 +264,7 @@
         
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 15px;
             margin-top: 30px;
         }
@@ -324,17 +320,6 @@
         
         .gallery-item:hover .image-overlay {
             opacity: 1;
-        }
-        
-        .image-title {
-            font-weight: 600;
-            margin-bottom: 5px;
-            font-family: 'Rajdhani', sans-serif;
-        }
-        
-        .image-desc {
-            font-size: 0.9rem;
-            opacity: 0.8;
         }
         
         .lightbox {
@@ -420,6 +405,67 @@
             color: var(--neon-accent);
         }
         
+        footer {
+            margin-top: 40px;
+            padding: 25px;
+            background: rgba(10, 12, 28, 0.6);
+            border-radius: 16px;
+            border: 1px solid var(--neon-primary);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--neon-primary);
+            text-shadow: 0 0 10px var(--neon-primary);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .contact-item i {
+            color: var(--neon-accent);
+            font-size: 1.2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            color: var(--neon-primary);
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--neon-accent);
+            transform: translateY(-3px);
+            text-shadow: 0 0 10px var(--neon-accent);
+        }
+        
         @keyframes pulse {
             0% { text-shadow: 0 0 10px var(--neon-primary), 0 0 20px var(--neon-primary); }
             100% { text-shadow: 0 0 15px var(--neon-primary), 0 0 30px var(--neon-primary); }
@@ -436,13 +482,18 @@
         
         @media (max-width: 1200px) {
             .gallery-grid {
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(3, 1fr);
             }
         }
         
         @media (max-width: 900px) {
             .gallery-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .color-selectors {
+                flex-direction: column;
+                gap: 10px;
             }
         }
         
@@ -455,23 +506,32 @@
                 font-size: 2.5rem;
             }
             
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .color-selectors {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
             .font-options {
                 grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
             }
         }
         
         @media (max-width: 480px) {
             .gallery-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            
+            header, .controls-section, .preview-section, footer {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.4rem;
             }
         }
     </style>
@@ -480,7 +540,7 @@
     <div class="container">
         <header>
             <h1>NEON GALLERY MAKER</h1>
-            <p class="app-description">Create stunning futuristic image galleries with glowing neon effects. Add up to 10 images with your own links!</p>
+            <p class="app-description">Create stunning futuristic image galleries with glowing neon effects. Add up to 16 images with your own links!</p>
         </header>
         
         <div class="app-container">
@@ -531,16 +591,12 @@
                         <div class="font-option font-poppins" data-font="poppins">Poppins</div>
                         <div class="font-option font-oxanium" data-font="oxanium">Oxanium</div>
                         <div class="font-option font-audiowide" data-font="audiowide">Audiowide</div>
-                        <div class="font-option font-bankgothic" data-font="bankgothic">Bank Gothic</div>
-                        <div class="font-option font-nasalization" data-font="nasalization">Nasalization</div>
-                        <div class="font-option font-kiona" data-font="kiona">Kiona</div>
-                        <div class="font-option font-geostar" data-font="geostar">Geostar</div>
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="image-links"><i class="fas fa-link"></i> Image URLs (One per line, max 10)</label>
-                    <textarea id="image-links" placeholder="Paste image URLs here (one per line)" rows="10"></textarea>
+                    <label for="image-links"><i class="fas fa-link"></i> Image URLs (One per line, max 16)</label>
+                    <textarea id="image-links" placeholder="Paste image URLs here (one per line)" rows="8"></textarea>
                 </div>
                 
                 <div class="actions">
@@ -559,7 +615,13 @@
                     </div>
                     
                     <div class="gallery-grid" id="gallery-container">
-                        <!-- 10 empty gallery slots -->
+                        <!-- 16 empty gallery slots -->
+                        <div class="gallery-item empty"></div>
+                        <div class="gallery-item empty"></div>
+                        <div class="gallery-item empty"></div>
+                        <div class="gallery-item empty"></div>
+                        <div class="gallery-item empty"></div>
+                        <div class="gallery-item empty"></div>
                         <div class="gallery-item empty"></div>
                         <div class="gallery-item empty"></div>
                         <div class="gallery-item empty"></div>
@@ -574,6 +636,33 @@
                 </div>
             </div>
         </div>
+        
+        <footer>
+            <div class="footer-content">
+                <h3 class="footer-title">CONTACT INFORMATION</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>email@example.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>(123) 456-7890</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Your City, Country</span>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </footer>
         
         <div class="lightbox" id="lightbox">
             <div class="lightbox-content">
@@ -700,7 +789,7 @@
                 previewTitle.textContent = title;
                 previewDesc.textContent = description;
                 
-                // Clear existing images but keep the 10-item structure
+                // Clear existing images but keep the item structure
                 const galleryItems = galleryContainer.querySelectorAll('.gallery-item');
                 
                 // Reset all gallery items
@@ -708,7 +797,6 @@
                     item.innerHTML = '';
                     item.classList.add('empty');
                     item.classList.remove('has-image');
-                    item.removeEventListener('click', handleImageClick);
                 });
                 
                 if (imageLinks.length === 0) {
@@ -716,7 +804,7 @@
                 }
                 
                 // Add images to the first N slots
-                for (let i = 0; i < Math.min(imageLinks.length, 10); i++) {
+                for (let i = 0; i < Math.min(imageLinks.length, 16); i++) {
                     const link = imageLinks[i];
                     const galleryItem = galleryItems[i];
                     
@@ -767,20 +855,11 @@
                 } else if (selectedFont === 'audiowide') {
                     previewTitle.style.fontFamily = 'Audiowide, cursive';
                     previewDesc.style.fontFamily = 'Audiowide, cursive';
-                } else if (selectedFont === 'bankgothic') {
-                    previewTitle.style.fontFamily = 'BankGothic, sans-serif';
-                    previewDesc.style.fontFamily = 'BankGothic, sans-serif';
-                } else if (selectedFont === 'nasalization') {
-                    previewTitle.style.fontFamily = 'Nasalization, sans-serif';
-                    previewDesc.style.fontFamily = 'Nasalization, sans-serif';
-                } else if (selectedFont === 'kiona') {
-                    previewTitle.style.fontFamily = 'Kiona, sans-serif';
-                    previewDesc.style.fontFamily = 'Kiona, sans-serif';
-                } else if (selectedFont === 'geostar') {
-                    previewTitle.style.fontFamily = 'Geostar, cursive';
-                    previewDesc.style.fontFamily = 'Geostar, cursive';
                 }
             }
+            
+            // Initialize with some sample images if needed
+            // document.getElementById('image-links').value = "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80\nhttps://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80\nhttps://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80";
         });
     </script>
 </body>

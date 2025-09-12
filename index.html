@@ -34,10 +34,14 @@
             min-height: 100vh;
             padding: 20px;
             overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
         .container {
             max-width: 1400px;
+            width: 100%;
             margin: 0 auto;
         }
         
@@ -51,6 +55,7 @@
             box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
             position: relative;
             overflow: hidden;
+            width: 100%;
         }
         
         header::before {
@@ -93,6 +98,7 @@
             display: flex;
             gap: 30px;
             flex-wrap: wrap;
+            width: 100%;
         }
         
         .controls-section {
@@ -413,6 +419,7 @@
             border: 1px solid var(--neon-primary);
             box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
             text-align: center;
+            width: 100%;
         }
         
         .footer-content {
@@ -599,8 +606,40 @@
                     <textarea id="image-links" placeholder="Paste image URLs here (one per line)" rows="8"></textarea>
                 </div>
                 
+                <h2 class="section-title">CUSTOMIZE FOOTER</h2>
+                
+                <div class="form-group">
+                    <label for="footer-title"><i class="fas fa-heading"></i> Footer Title</label>
+                    <input type="text" id="footer-title" placeholder="Enter footer title" value="CONTACT INFORMATION">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact-email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="text" id="contact-email" placeholder="Enter email" value="email@example.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact-phone"><i class="fas fa-phone"></i> Phone</label>
+                    <input type="text" id="contact-phone" placeholder="Enter phone number" value="(123) 456-7890">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact-address"><i class="fas fa-map-marker-alt"></i> Address</label>
+                    <input type="text" id="contact-address" placeholder="Enter address" value="Your City, Country">
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-share-alt"></i> Social Media Links</label>
+                    <input type="text" id="social-facebook" placeholder="Facebook URL" value="https://facebook.com/yourprofile">
+                    <input type="text" id="social-twitter" placeholder="Twitter URL" value="https://twitter.com/yourprofile" style="margin-top: 8px;">
+                    <input type="text" id="social-instagram" placeholder="Instagram URL" value="https://instagram.com/yourprofile" style="margin-top: 8px;">
+                    <input type="text" id="social-linkedin" placeholder="LinkedIn URL" value="https://linkedin.com/in/yourprofile" style="margin-top: 8px;">
+                    <input type="text" id="social-github" placeholder="GitHub URL" value="https://github.com/yourprofile" style="margin-top: 8px;">
+                </div>
+                
                 <div class="actions">
                     <button id="generate-btn" class="btn-generate"><i class="fas fa-magic"></i> Generate Gallery</button>
+                    <button id="update-footer-btn" class="btn-generate"><i class="fas fa-sync-alt"></i> Update Footer</button>
                     <button id="clear-btn" class="btn-clear"><i class="fas fa-trash"></i> Clear All</button>
                 </div>
             </div>
@@ -637,7 +676,7 @@
             </div>
         </div>
         
-        <footer>
+        <footer id="preview-footer">
             <div class="footer-content">
                 <h3 class="footer-title">CONTACT INFORMATION</h3>
                 <div class="contact-info">
@@ -655,11 +694,11 @@
                     </div>
                 </div>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="https://facebook.com/yourprofile" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/yourprofile" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com/yourprofile" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com/in/yourprofile" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/yourprofile" target="_blank"><i class="fab fa-github"></i></a>
                 </div>
             </div>
         </footer>
@@ -678,6 +717,7 @@
             // Elements
             const generateBtn = document.getElementById('generate-btn');
             const clearBtn = document.getElementById('clear-btn');
+            const updateFooterBtn = document.getElementById('update-footer-btn');
             const galleryContainer = document.getElementById('gallery-container');
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
@@ -687,6 +727,20 @@
             const previewDesc = document.getElementById('preview-desc');
             const galleryTitleInput = document.getElementById('gallery-title');
             const galleryDescInput = document.getElementById('gallery-desc');
+            
+            // Footer elements
+            const footerTitleInput = document.getElementById('footer-title');
+            const contactEmailInput = document.getElementById('contact-email');
+            const contactPhoneInput = document.getElementById('contact-phone');
+            const contactAddressInput = document.getElementById('contact-address');
+            const socialFacebookInput = document.getElementById('social-facebook');
+            const socialTwitterInput = document.getElementById('social-twitter');
+            const socialInstagramInput = document.getElementById('social-instagram');
+            const socialLinkedinInput = document.getElementById('social-linkedin');
+            const socialGithubInput = document.getElementById('social-github');
+            
+            // Footer preview elements
+            const previewFooter = document.getElementById('preview-footer');
             
             // Color options
             const colorOptions = document.querySelectorAll('.color-option');
@@ -733,6 +787,11 @@
             // Generate gallery
             generateBtn.addEventListener('click', function() {
                 generateGallery();
+            });
+            
+            // Update footer
+            updateFooterBtn.addEventListener('click', function() {
+                updateFooter();
             });
             
             // Clear all
@@ -830,6 +889,36 @@
                         lightbox.style.display = 'flex';
                     });
                 }
+            }
+            
+            // Update footer function
+            function updateFooter() {
+                const footerTitle = footerTitleInput.value || 'CONTACT INFORMATION';
+                const email = contactEmailInput.value || 'email@example.com';
+                const phone = contactPhoneInput.value || '(123) 456-7890';
+                const address = contactAddressInput.value || 'Your City, Country';
+                
+                // Update footer content
+                const footerTitleElement = previewFooter.querySelector('.footer-title');
+                footerTitleElement.textContent = footerTitle;
+                
+                const contactItems = previewFooter.querySelectorAll('.contact-item');
+                contactItems[0].querySelector('span').textContent = email;
+                contactItems[1].querySelector('span').textContent = phone;
+                contactItems[2].querySelector('span').textContent = address;
+                
+                // Update social links
+                const socialLinks = previewFooter.querySelectorAll('.social-links a');
+                socialLinks[0].href = socialFacebookInput.value || '#';
+                socialLinks[1].href = socialTwitterInput.value || '#';
+                socialLinks[2].href = socialInstagramInput.value || '#';
+                socialLinks[3].href = socialLinkedinInput.value || '#';
+                socialLinks[4].href = socialGithubInput.value || '#';
+                
+                // Make sure all links open in new tab
+                socialLinks.forEach(link => {
+                    link.target = '_blank';
+                });
             }
             
             // Update fonts based on selection

@@ -270,7 +270,7 @@
         
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 15px;
             margin-top: 30px;
         }
@@ -415,6 +415,58 @@
             color: var(--neon-accent);
         }
         
+        .custom-button-container {
+            margin: 30px 0;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .custom-button {
+            padding: 15px 30px;
+            background: linear-gradient(45deg, var(--neon-alternate), var(--neon-secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: inline-block;
+            transition: all 0.3s;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .custom-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px var(--neon-alternate);
+        }
+        
+        .button-edit-form {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid var(--neon-primary);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+            margin-top: 20px;
+            width: 100%;
+            display: none;
+        }
+        
+        .button-edit-toggle {
+            margin-top: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--neon-alternate);
+            color: var(--neon-primary);
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .button-edit-toggle:hover {
+            background: rgba(0, 243, 255, 0.2);
+        }
+        
         footer {
             margin-top: 40px;
             padding: 25px;
@@ -470,12 +522,40 @@
             color: var(--neon-primary);
             font-size: 1.5rem;
             transition: all 0.3s;
+            position: relative;
+            display: inline-flex;
         }
         
         .social-links a:hover {
             color: var(--neon-accent);
             transform: translateY(-3px);
             text-shadow: 0 0 10px var(--neon-accept);
+        }
+        
+        .social-delete-btn {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff2d95;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .social-links a:hover .social-delete-btn {
+            display: flex;
+        }
+        
+        .social-delete-btn:hover {
+            background: #ff0066;
         }
         
         .footer-edit-toggle {
@@ -515,6 +595,26 @@
             font-size: 0.9rem;
         }
         
+        .social-media-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .social-toggle {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--neon-alternate);
+            color: var(--neon-primary);
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .social-toggle.active {
+            background: rgba(0, 243, 255, 0.2);
+        }
+        
         @keyframes pulse {
             0% { text-shadow: 0 0 10px var(--neon-primary), 0 0 20px var(--neon-primary); }
             100% { text-shadow: 0 0 15px var(--neon-primary), 0 0 30px var(--neon-primary); }
@@ -531,13 +631,13 @@
         
         @media (max-width: 1200px) {
             .gallery-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(4, 1fr);
             }
         }
         
         @media (max-width: 900px) {
             .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
             }
             
             .color-selectors {
@@ -566,11 +666,13 @@
             }
         }
         
-        @media (max-width: 480px) {
+        @media (max-width: 600px) {
             .gallery-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
+        }
+        
+        @media (max-width: 480px) {
             header, .controls-section, .preview-section, footer {
                 padding: 15px;
             }
@@ -589,7 +691,7 @@
     <div class="container">
         <header>
             <h1>NEON GALLERY MAKER</h1>
-            <p class="app-description">Create stunning futuristic image galleries with glowing neon effects. Add up to 16 images with your own links!</p>
+            <p class="app-description">Create stunning futuristic image galleries with glowing neon effects. Add up to 20 images with your own links!</p>
         </header>
         
         <div class="app-container">
@@ -644,8 +746,8 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="image-links"><i class="fas fa-link"></i> Image URLs (One per line, max 16)</label>
-                    <textarea id="image-links" placeholder="Paste image URLs here (one per line)" rows="8"></textarea>
+                    <label for="image-links"><i class="fas fa-link"></i> Image URLs (One per line, max 20)</label>
+                    <textarea id="image-links" placeholder="Paste image URLs here (one per line)" rows="10"></textarea>
                 </div>
                 
                 <div class="actions">
@@ -665,7 +767,11 @@
                     </div>
                     
                     <div class="gallery-grid" id="gallery-container">
-                        <!-- 16 empty gallery slots -->
+                        <!-- 20 empty gallery slots -->
+                        <div class="gallery-item empty"></div>
+                        <div class="gallery-item empty"></div>
+                        <div class="gallery-item empty"></div>
+                        <div class="gallery-item empty"></div>
                         <div class="gallery-item empty"></div>
                         <div class="gallery-item empty"></div>
                         <div class="gallery-item empty"></div>
@@ -687,6 +793,27 @@
             </div>
         </div>
         
+        <!-- Custom Button Section -->
+        <div class="custom-button-container">
+            <a href="#" id="custom-button" class="custom-button">Custom Button</a>
+            <button class="button-edit-toggle" id="button-edit-toggle">
+                <i class="fas fa-edit"></i> Edit Button
+            </button>
+            
+            <div class="button-edit-form" id="button-edit-form">
+                <h3 class="section-title">CUSTOMIZE BUTTON</h3>
+                <div class="form-group">
+                    <label for="button-text">Button Text</label>
+                    <input type="text" id="button-text" placeholder="Enter button text" value="Custom Button">
+                </div>
+                <div class="form-group">
+                    <label for="button-link">Button Link URL</label>
+                    <input type="text" id="button-link" placeholder="Enter link URL" value="#">
+                </div>
+                <button id="save-button-settings">Save Button Settings</button>
+            </div>
+        </div>
+        
         <footer>
             <div class="footer-content">
                 <h3 class="footer-title">CONTACT INFORMATION</h3>
@@ -705,13 +832,51 @@
                     </div>
                 </div>
                 <div class="social-links">
-                    <a href="https://facebook.com" target="_blank" id="footer-facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://twitter.com" target="_blank" id="footer-twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="https://instagram.com" target="_blank" id="footer-instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://linkedin.com" target="_blank" id="footer-linkedin"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://github.com" target="_blank" id="footer-github"><i class="fab fa-github"></i></a>
-                    <a href="https://snapchat.com" target="_blank" id="footer-snapchat"><i class="fab fa-snapchat-ghost"></i></a>
-                    <a href="https://youtube.com" target="_blank" id="footer-youtube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://facebook.com" target="_blank" id="footer-facebook" class="social-icon">
+                        <i class="fab fa-facebook-f"></i>
+                        <button class="social-delete-btn" data-platform="facebook">×</button>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" id="footer-twitter" class="social-icon">
+                        <i class="fab fa-twitter"></i>
+                        <button class="social-delete-btn" data-platform="twitter">×</button>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" id="footer-instagram" class="social-icon">
+                        <i class="fab fa-instagram"></i>
+                        <button class="social-delete-btn" data-platform="instagram">×</button>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" id="footer-linkedin" class="social-icon">
+                        <i class="fab fa-linkedin-in"></i>
+                        <button class="social-delete-btn" data-platform="linkedin">×</button>
+                    </a>
+                    <a href="https://github.com" target="_blank" id="footer-github" class="social-icon">
+                        <i class="fab fa-github"></i>
+                        <button class="social-delete-btn" data-platform="github">×</button>
+                    </a>
+                    <a href="https://snapchat.com" target="_blank" id="footer-snapchat" class="social-icon">
+                        <i class="fab fa-snapchat-ghost"></i>
+                        <button class="social-delete-btn" data-platform="snapchat">×</button>
+                    </a>
+                    <a href="https://youtube.com" target="_blank" id="footer-youtube" class="social-icon">
+                        <i class="fab fa-youtube"></i>
+                        <button class="social-delete-btn" data-platform="youtube">×</button>
+                    </a>
+                    <!-- New Social Media Links -->
+                    <a href="https://tiktok.com" target="_blank" id="footer-tiktok" class="social-icon">
+                        <i class="fab fa-tiktok"></i>
+                        <button class="social-delete-btn" data-platform="tiktok">×</button>
+                    </a>
+                    <a href="https://reddit.com" target="_blank" id="footer-reddit" class="social-icon">
+                        <i class="fab fa-reddit-alien"></i>
+                        <button class="social-delete-btn" data-platform="reddit">×</button>
+                    </a>
+                    <a href="https://pinterest.com" target="_blank" id="footer-pinterest" class="social-icon">
+                        <i class="fab fa-pinterest-p"></i>
+                        <button class="social-delete-btn" data-platform="pinterest">×</button>
+                    </a>
+                    <a href="https://threads.net" target="_blank" id="footer-threads" class="social-icon">
+                        <i class="fab fa-threads"></i>
+                        <button class="social-delete-btn" data-platform="threads">×</button>
+                    </a>
                 </div>
                 
                 <button class="footer-edit-toggle" id="footer-edit-toggle">
@@ -731,34 +896,71 @@
                         <label for="edit-address">Address</label>
                         <input type="text" id="edit-address" value="Your City, Country">
                     </div>
+                    
                     <div class="form-group">
-                        <label for="edit-facebook">Facebook URL</label>
-                        <input type="text" id="edit-facebook" value="https://facebook.com">
+                        <label>Social Media Platforms</label>
+                        <div class="social-media-controls">
+                            <button type="button" class="social-toggle active" data-platform="facebook">Facebook</button>
+                            <button type="button" class="social-toggle active" data-platform="twitter">Twitter</button>
+                            <button type="button" class="social-toggle active" data-platform="instagram">Instagram</button>
+                            <button type="button" class="social-toggle active" data-platform="linkedin">LinkedIn</button>
+                            <button type="button" class="social-toggle active" data-platform="github">GitHub</button>
+                            <button type="button" class="social-toggle active" data-platform="snapchat">Snapchat</button>
+                            <button type="button" class="social-toggle active" data-platform="youtube">YouTube</button>
+                            <button type="button" class="social-toggle active" data-platform="tiktok">TikTok</button>
+                            <button type="button" class="social-toggle active" data-platform="reddit">Reddit</button>
+                            <button type="button" class="social-toggle active" data-platform="pinterest">Pinterest</button>
+                            <button type="button" class="social-toggle active" data-platform="threads">Threads</button>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="edit-twitter">Twitter URL</label>
-                        <input type="text" id="edit-twitter" value="https://twitter.com">
+                    
+                    <div id="social-media-inputs">
+                        <div class="form-group social-input" data-platform="facebook">
+                            <label for="edit-facebook">Facebook URL</label>
+                            <input type="text" id="edit-facebook" value="https://facebook.com">
+                        </div>
+                        <div class="form-group social-input" data-platform="twitter">
+                            <label for="edit-twitter">Twitter URL</label>
+                            <input type="text" id="edit-twitter" value="https://twitter.com">
+                        </div>
+                        <div class="form-group social-input" data-platform="instagram">
+                            <label for="edit-instagram">Instagram URL</label>
+                            <input type="text" id="edit-instagram" value="https://instagram.com">
+                        </div>
+                        <div class="form-group social-input" data-platform="linkedin">
+                            <label for="edit-linkedin">LinkedIn URL</label>
+                            <input type="text" id="edit-linkedin" value="https://linkedin.com">
+                        </div>
+                        <div class="form-group social-input" data-platform="github">
+                            <label for="edit-github">GitHub URL</label>
+                            <input type="text" id="edit-github" value="https://github.com">
+                        </div>
+                        <div class="form-group social-input" data-platform="snapchat">
+                            <label for="edit-snapchat">SnapChat URL</label>
+                            <input type="text" id="edit-snapchat" value="https://snapchat.com">
+                        </div>
+                        <div class="form-group social-input" data-platform="youtube">
+                            <label for="edit-youtube">YouTube URL</label>
+                            <input type="text" id="edit-youtube" value="https://youtube.com">
+                        </div>
+                        <div class="form-group social-input" data-platform="tiktok">
+                            <label for="edit-tiktok">TikTok URL</label>
+                            <input type="text" id="edit-tiktok" value="https://tiktok.com">
+                        </div>
+                        <div class="form-group social-input" data-platform="reddit">
+                            <label for="edit-reddit">Reddit URL</label>
+                            <input type="text" id="edit-reddit" value="https://reddit.com">
+                        </div>
+                        <div class="form-group social-input" data-platform="pinterest">
+                            <label for="edit-pinterest">Pinterest URL</label>
+                            <input type="text" id="edit-pinterest" value="https://pinterest.com">
+                        </div>
+                        <div class="form-group social-input" data-platform="threads">
+                            <label for="edit-threads">Threads URL</label>
+                            <input type="text" id="edit-threads" value="https://threads.net">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="edit-instagram">Instagram URL</label>
-                        <input type="text" id="edit-instagram" value="https://instagram.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="edit-linkedin">LinkedIn URL</label>
-                        <input type="text" id="edit-linkedin" value="https://linkedin.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="edit-github">GitHub URL</label>
-                        <input type="text" id="edit-github" value="https://github.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="edit-snapchat">SnapChat URL</label>
-                        <input type="text" id="edit-snapchat" value="https://snapchat.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="edit-youtube">YouTube URL</label>
-                        <input type="text" id="edit-youtube" value="https://youtube.com">
-                    </div>
+                    
                     <button id="save-footer-btn">Save Footer Changes</button>
                 </div>
             </div>
@@ -793,13 +995,21 @@
             const footerEmail = document.getElementById('footer-email');
             const footerPhone = document.getElementById('footer-phone');
             const footerAddress = document.getElementById('footer-address');
-            const footerFacebook = document.getElementById('footer-facebook');
-            const footerTwitter = document.getElementById('footer-twitter');
-            const footerInstagram = document.getElementById('footer-instagram');
-            const footerLinkedin = document.getElementById('footer-linkedin');
-            const footerGithub = document.getElementById('footer-github');
-            const footerSnapchat = document.getElementById('footer-snapchat');
-            const footerYoutube = document.getElementById('footer-youtube');
+            
+            // Social media elements
+            const socialIcons = {
+                'facebook': document.getElementById('footer-facebook'),
+                'twitter': document.getElementById('footer-twitter'),
+                'instagram': document.getElementById('footer-instagram'),
+                'linkedin': document.getElementById('footer-linkedin'),
+                'github': document.getElementById('footer-github'),
+                'snapchat': document.getElementById('footer-snapchat'),
+                'youtube': document.getElementById('footer-youtube'),
+                'tiktok': document.getElementById('footer-tiktok'),
+                'reddit': document.getElementById('footer-reddit'),
+                'pinterest': document.getElementById('footer-pinterest'),
+                'threads': document.getElementById('footer-threads')
+            };
             
             // Footer edit elements
             const footerEditToggle = document.getElementById('footer-edit-toggle');
@@ -807,14 +1017,18 @@
             const editEmail = document.getElementById('edit-email');
             const editPhone = document.getElementById('edit-phone');
             const editAddress = document.getElementById('edit-address');
-            const editFacebook = document.getElementById('edit-facebook');
-            const editTwitter = document.getElementById('edit-twitter');
-            const editInstagram = document.getElementById('edit-instagram');
-            const editLinkedin = document.getElementById('edit-linkedin');
-            const editGithub = document.getElementById('edit-github');
-            const editSnapchat = document.getElementById('edit-snapchat');
-            const editYoutube = document.getElementById('edit-youtube');
             const saveFooterBtn = document.getElementById('save-footer-btn');
+            
+            // Social media toggle buttons
+            const socialToggles = document.querySelectorAll('.social-toggle');
+            
+            // Custom button elements
+            const customButton = document.getElementById('custom-button');
+            const buttonEditToggle = document.getElementById('button-edit-toggle');
+            const buttonEditForm = document.getElementById('button-edit-form');
+            const buttonTextInput = document.getElementById('button-text');
+            const buttonLinkInput = document.getElementById('button-link');
+            const saveButtonSettings = document.getElementById('save-button-settings');
             
             // Color options
             const colorOptions = document.querySelectorAll('.color-option');
@@ -822,6 +1036,9 @@
             // Font options
             const fontOptions = document.querySelectorAll('.font-option');
             let selectedFont = 'orbitron';
+            
+            // Track deleted social media platforms
+            const deletedSocialPlatforms = new Set();
             
             // Set up color selection
             colorOptions.forEach(option => {
@@ -926,14 +1143,45 @@
                     editEmail.value = footerEmail.textContent;
                     editPhone.value = footerPhone.textContent;
                     editAddress.value = footerAddress.textContent;
-                    editFacebook.value = footerFacebook.href;
-                    editTwitter.value = footerTwitter.href;
-                    editInstagram.value = footerInstagram.href;
-                    editLinkedin.value = footerLinkedin.href;
-                    editGithub.value = footerGithub.href;
-                    editSnapchat.value = footerSnapchat.href;
-                    editYoutube.value = footerYoutube.href;
+                    
+                    // Update social toggles based on deleted platforms
+                    socialToggles.forEach(toggle => {
+                        const platform = toggle.getAttribute('data-platform');
+                        if (deletedSocialPlatforms.has(platform)) {
+                            toggle.classList.remove('active');
+                        } else {
+                            toggle.classList.add('active');
+                        }
+                    });
+                    
+                    // Show/hide social inputs based on toggles
+                    document.querySelectorAll('.social-input').forEach(input => {
+                        const platform = input.getAttribute('data-platform');
+                        const toggle = document.querySelector(`.social-toggle[data-platform="${platform}"]`);
+                        if (toggle && toggle.classList.contains('active')) {
+                            input.style.display = 'block';
+                        } else {
+                            input.style.display = 'none';
+                        }
+                    });
                 }
+            });
+            
+            // Social media toggle functionality
+            socialToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    const platform = this.getAttribute('data-platform');
+                    const input = document.querySelector(`.social-input[data-platform="${platform}"]`);
+                    
+                    if (this.classList.contains('active')) {
+                        input.style.display = 'block';
+                        deletedSocialPlatforms.delete(platform);
+                    } else {
+                        input.style.display = 'none';
+                        deletedSocialPlatforms.add(platform);
+                    }
+                });
             });
             
             // Save footer changes
@@ -941,18 +1189,66 @@
                 footerEmail.textContent = editEmail.value;
                 footerPhone.textContent = editPhone.value;
                 footerAddress.textContent = editAddress.value;
-                footerFacebook.href = ensureHttp(editFacebook.value);
-                footerTwitter.href = ensureHttp(editTwitter.value);
-                footerInstagram.href = ensureHttp(editInstagram.value);
-                footerLinkedin.href = ensureHttp(editLinkedin.value);
-                footerGithub.href = ensureHttp(editGithub.value);
-                footerSnapchat.href = ensureHttp(editSnapchat.value);
-                footerYoutube.href = ensureHttp(editYoutube.value);
+                
+                // Update social media links and visibility
+                socialToggles.forEach(toggle => {
+                    const platform = toggle.getAttribute('data-platform');
+                    const input = document.querySelector(`#edit-${platform}`);
+                    const icon = socialIcons[platform];
+                    
+                    if (toggle.classList.contains('active')) {
+                        icon.href = ensureHttp(input.value);
+                        icon.style.display = 'inline-flex';
+                    } else {
+                        icon.style.display = 'none';
+                    }
+                });
                 
                 footerEditForm.style.display = 'none';
                 footerEditToggle.innerHTML = '<i class="fas fa-edit"></i> Edit Footer';
                 
                 alert('Footer changes saved successfully!');
+            });
+            
+            // Button edit toggle functionality
+            buttonEditToggle.addEventListener('click', function() {
+                if (buttonEditForm.style.display === 'block') {
+                    buttonEditForm.style.display = 'none';
+                    this.innerHTML = '<i class="fas fa-edit"></i> Edit Button';
+                } else {
+                    buttonEditForm.style.display = 'block';
+                    this.innerHTML = '<i class="fas fa-times"></i> Close Editor';
+                    
+                    // Populate form with current values
+                    buttonTextInput.value = customButton.textContent;
+                    buttonLinkInput.value = customButton.href;
+                }
+            });
+            
+            // Save button settings
+            saveButtonSettings.addEventListener('click', function() {
+                customButton.textContent = buttonTextInput.value || 'Custom Button';
+                customButton.href = ensureHttp(buttonLinkInput.value) || '#';
+                buttonEditForm.style.display = 'none';
+                buttonEditToggle.innerHTML = '<i class="fas fa-edit"></i> Edit Button';
+                alert('Button settings saved successfully!');
+            });
+            
+            // Social media delete functionality
+            document.querySelectorAll('.social-delete-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const platform = this.getAttribute('data-platform');
+                    const toggle = document.querySelector(`.social-toggle[data-platform="${platform}"]`);
+                    
+                    if (toggle) {
+                        toggle.classList.remove('active');
+                        deletedSocialPlatforms.add(platform);
+                        socialIcons[platform].style.display = 'none';
+                    }
+                });
             });
             
             // Generate gallery function
@@ -979,7 +1275,7 @@
                 }
                 
                 // Add images to the first N slots
-                for (let i = 0; i < Math.min(imageLinks.length, 16); i++) {
+                for (let i = 0; i < Math.min(imageLinks.length, 20); i++) {
                     const link = imageLinks[i];
                     const galleryItem = galleryItems[i];
                     
@@ -1057,7 +1353,7 @@
                 
                 // Generate gallery HTML
                 let galleryHTML = '';
-                for (let i = 0; i < 16; i++) {
+                for (let i = 0; i < 20; i++) {
                     if (i < imageLinks.length) {
                         galleryHTML += `<div class="gallery-item">
                             <img src="${imageLinks[i]}" alt="Gallery image ${i+1}">
@@ -1066,6 +1362,16 @@
                         galleryHTML += '<div class="gallery-item empty"></div>';
                     }
                 }
+                
+                // Generate social media HTML only for active platforms
+                let socialMediaHTML = '';
+                socialToggles.forEach(toggle => {
+                    const platform = toggle.getAttribute('data-platform');
+                    if (toggle.classList.contains('active')) {
+                        const input = document.querySelector(`#edit-${platform}`);
+                        socialMediaHTML += `<a href="${ensureHttp(input.value)}" target="_blank"><i class="fab fa-${platform}"></i></a>`;
+                    }
+                });
                 
                 // Generate final HTML
                 const finalHTML = `<!DOCTYPE html>
@@ -1148,7 +1454,7 @@
         
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 15px;
             margin-top: 30px;
         }
@@ -1189,6 +1495,32 @@
         
         .gallery-item:hover img {
             transform: scale(1.1);
+        }
+        
+        .custom-button-container {
+            margin: 30px 0;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .custom-button {
+            padding: 15px 30px;
+            background: linear-gradient(45deg, var(--neon-alternate), var(--neon-secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: inline-block;
+            transition: all 0.3s;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .custom-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px var(--neon-alternate);
         }
         
         footer {
@@ -1256,11 +1588,17 @@
         
         @media (max-width: 1200px) {
             .gallery-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(4, 1fr);
             }
         }
         
         @media (max-width: 900px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
             .gallery-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -1271,12 +1609,6 @@
                 flex-direction: column;
                 align-items: center;
                 gap: 10px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
@@ -1290,6 +1622,10 @@
         
         <div class="gallery-grid">
             ${galleryHTML}
+        </div>
+        
+        <div class="custom-button-container">
+            <a href="${customButton.href}" class="custom-button">${customButton.textContent}</a>
         </div>
         
         <footer>
@@ -1310,13 +1646,7 @@
                     </div>
                 </div>
                 <div class="social-links">
-                    <a href="${footerFacebook.href}" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="${footerTwitter.href}" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="${footerInstagram.href}" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="${footerLinkedin.href}" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="${footerGithub.href}" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="${footerSnapchat.href}" target="_blank"><i class="fab fa-snapchat-ghost"></i></a>
-                    <a href="${footerYoutube.href}" target="_blank"><i class="fab fa-youtube"></i></a>
+                    ${socialMediaHTML}
                 </div>
             </div>
         </footer>

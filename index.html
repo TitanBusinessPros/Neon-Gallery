@@ -395,6 +395,10 @@
             background: linear-gradient(45deg, #ff3300, #ff9900);
         }
         
+        .btn-export {
+            background: linear-gradient(45deg, #0ffc33, #00f3ff);
+        }
+        
         .color-selectors {
             display: flex;
             gap: 20px;
@@ -459,6 +463,7 @@
             justify-content: center;
             gap: 15px;
             margin-top: 15px;
+            flex-wrap: wrap;
         }
         
         .social-links a {
@@ -470,7 +475,44 @@
         .social-links a:hover {
             color: var(--neon-accent);
             transform: translateY(-3px);
-            text-shadow: 0 0 10px var(--neon-accent);
+            text-shadow: 0 0 10px var(--neon-accept);
+        }
+        
+        .footer-edit-toggle {
+            margin-top: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--neon-alternate);
+            color: var(--neon-primary);
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .footer-edit-toggle:hover {
+            background: rgba(0, 243, 255, 0.2);
+        }
+        
+        .footer-edit-form {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            border: 1px solid var(--neon-alternate);
+        }
+        
+        .footer-edit-form .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .footer-edit-form label {
+            font-size: 1rem;
+        }
+        
+        .footer-edit-form input {
+            padding: 8px 12px;
+            font-size: 0.9rem;
         }
         
         @keyframes pulse {
@@ -606,41 +648,10 @@
                     <textarea id="image-links" placeholder="Paste image URLs here (one per line)" rows="8"></textarea>
                 </div>
                 
-                <h2 class="section-title">CUSTOMIZE FOOTER</h2>
-                
-                <div class="form-group">
-                    <label for="footer-title"><i class="fas fa-heading"></i> Footer Title</label>
-                    <input type="text" id="footer-title" placeholder="Enter footer title" value="CONTACT INFORMATION">
-                </div>
-                
-                <div class="form-group">
-                    <label for="contact-email"><i class="fas fa-envelope"></i> Email</label>
-                    <input type="text" id="contact-email" placeholder="Enter email" value="email@example.com">
-                </div>
-                
-                <div class="form-group">
-                    <label for="contact-phone"><i class="fas fa-phone"></i> Phone</label>
-                    <input type="text" id="contact-phone" placeholder="Enter phone number" value="(123) 456-7890">
-                </div>
-                
-                <div class="form-group">
-                    <label for="contact-address"><i class="fas fa-map-marker-alt"></i> Address</label>
-                    <input type="text" id="contact-address" placeholder="Enter address" value="Your City, Country">
-                </div>
-                
-                <div class="form-group">
-                    <label><i class="fas fa-share-alt"></i> Social Media Links</label>
-                    <input type="text" id="social-facebook" placeholder="Facebook URL" value="https://facebook.com/yourprofile">
-                    <input type="text" id="social-twitter" placeholder="Twitter URL" value="https://twitter.com/yourprofile" style="margin-top: 8px;">
-                    <input type="text" id="social-instagram" placeholder="Instagram URL" value="https://instagram.com/yourprofile" style="margin-top: 8px;">
-                    <input type="text" id="social-linkedin" placeholder="LinkedIn URL" value="https://linkedin.com/in/yourprofile" style="margin-top: 8px;">
-                    <input type="text" id="social-github" placeholder="GitHub URL" value="https://github.com/yourprofile" style="margin-top: 8px;">
-                </div>
-                
                 <div class="actions">
                     <button id="generate-btn" class="btn-generate"><i class="fas fa-magic"></i> Generate Gallery</button>
-                    <button id="update-footer-btn" class="btn-generate"><i class="fas fa-sync-alt"></i> Update Footer</button>
                     <button id="clear-btn" class="btn-clear"><i class="fas fa-trash"></i> Clear All</button>
+                    <button id="export-btn" class="btn-export"><i class="fas fa-download"></i> Export HTML</button>
                 </div>
             </div>
             
@@ -676,29 +687,79 @@
             </div>
         </div>
         
-        <footer id="preview-footer">
+        <footer>
             <div class="footer-content">
                 <h3 class="footer-title">CONTACT INFORMATION</h3>
                 <div class="contact-info">
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <span>email@example.com</span>
+                        <span id="footer-email">email@example.com</span>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-phone"></i>
-                        <span>(123) 456-7890</span>
+                        <span id="footer-phone">(123) 456-7890</span>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <span>Your City, Country</span>
+                        <span id="footer-address">Your City, Country</span>
                     </div>
                 </div>
                 <div class="social-links">
-                    <a href="https://facebook.com/yourprofile" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://twitter.com/yourprofile" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="https://instagram.com/yourprofile" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://linkedin.com/in/yourprofile" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://github.com/yourprofile" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://facebook.com" target="_blank" id="footer-facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com" target="_blank" id="footer-twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" target="_blank" id="footer-instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" target="_blank" id="footer-linkedin"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com" target="_blank" id="footer-github"><i class="fab fa-github"></i></a>
+                    <a href="https://snapchat.com" target="_blank" id="footer-snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+                    <a href="https://youtube.com" target="_blank" id="footer-youtube"><i class="fab fa-youtube"></i></a>
+                </div>
+                
+                <button class="footer-edit-toggle" id="footer-edit-toggle">
+                    <i class="fas fa-edit"></i> Edit Footer
+                </button>
+                
+                <div class="footer-edit-form" id="footer-edit-form">
+                    <div class="form-group">
+                        <label for="edit-email">Email</label>
+                        <input type="text" id="edit-email" value="email@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-phone">Phone</label>
+                        <input type="text" id="edit-phone" value="(123) 456-7890">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-address">Address</label>
+                        <input type="text" id="edit-address" value="Your City, Country">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-facebook">Facebook URL</label>
+                        <input type="text" id="edit-facebook" value="https://facebook.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-twitter">Twitter URL</label>
+                        <input type="text" id="edit-twitter" value="https://twitter.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-instagram">Instagram URL</label>
+                        <input type="text" id="edit-instagram" value="https://instagram.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-linkedin">LinkedIn URL</label>
+                        <input type="text" id="edit-linkedin" value="https://linkedin.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-github">GitHub URL</label>
+                        <input type="text" id="edit-github" value="https://github.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-snapchat">SnapChat URL</label>
+                        <input type="text" id="edit-snapchat" value="https://snapchat.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-youtube">YouTube URL</label>
+                        <input type="text" id="edit-youtube" value="https://youtube.com">
+                    </div>
+                    <button id="save-footer-btn">Save Footer Changes</button>
                 </div>
             </div>
         </footer>
@@ -717,7 +778,7 @@
             // Elements
             const generateBtn = document.getElementById('generate-btn');
             const clearBtn = document.getElementById('clear-btn');
-            const updateFooterBtn = document.getElementById('update-footer-btn');
+            const exportBtn = document.getElementById('export-btn');
             const galleryContainer = document.getElementById('gallery-container');
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
@@ -729,18 +790,31 @@
             const galleryDescInput = document.getElementById('gallery-desc');
             
             // Footer elements
-            const footerTitleInput = document.getElementById('footer-title');
-            const contactEmailInput = document.getElementById('contact-email');
-            const contactPhoneInput = document.getElementById('contact-phone');
-            const contactAddressInput = document.getElementById('contact-address');
-            const socialFacebookInput = document.getElementById('social-facebook');
-            const socialTwitterInput = document.getElementById('social-twitter');
-            const socialInstagramInput = document.getElementById('social-instagram');
-            const socialLinkedinInput = document.getElementById('social-linkedin');
-            const socialGithubInput = document.getElementById('social-github');
+            const footerEmail = document.getElementById('footer-email');
+            const footerPhone = document.getElementById('footer-phone');
+            const footerAddress = document.getElementById('footer-address');
+            const footerFacebook = document.getElementById('footer-facebook');
+            const footerTwitter = document.getElementById('footer-twitter');
+            const footerInstagram = document.getElementById('footer-instagram');
+            const footerLinkedin = document.getElementById('footer-linkedin');
+            const footerGithub = document.getElementById('footer-github');
+            const footerSnapchat = document.getElementById('footer-snapchat');
+            const footerYoutube = document.getElementById('footer-youtube');
             
-            // Footer preview elements
-            const previewFooter = document.getElementById('preview-footer');
+            // Footer edit elements
+            const footerEditToggle = document.getElementById('footer-edit-toggle');
+            const footerEditForm = document.getElementById('footer-edit-form');
+            const editEmail = document.getElementById('edit-email');
+            const editPhone = document.getElementById('edit-phone');
+            const editAddress = document.getElementById('edit-address');
+            const editFacebook = document.getElementById('edit-facebook');
+            const editTwitter = document.getElementById('edit-twitter');
+            const editInstagram = document.getElementById('edit-instagram');
+            const editLinkedin = document.getElementById('edit-linkedin');
+            const editGithub = document.getElementById('edit-github');
+            const editSnapchat = document.getElementById('edit-snapchat');
+            const editYoutube = document.getElementById('edit-youtube');
+            const saveFooterBtn = document.getElementById('save-footer-btn');
             
             // Color options
             const colorOptions = document.querySelectorAll('.color-option');
@@ -789,11 +863,6 @@
                 generateGallery();
             });
             
-            // Update footer
-            updateFooterBtn.addEventListener('click', function() {
-                updateFooter();
-            });
-            
             // Clear all
             clearBtn.addEventListener('click', function() {
                 galleryTitleInput.value = '';
@@ -818,6 +887,11 @@
                 previewDesc.textContent = 'Your gallery description will appear here';
             });
             
+            // Export HTML
+            exportBtn.addEventListener('click', function() {
+                exportHTML();
+            });
+            
             // Update title and description in real-time
             galleryTitleInput.addEventListener('input', function() {
                 previewTitle.textContent = this.value || 'MY AWESOME GALLERY';
@@ -837,6 +911,48 @@
                 if (e.target === lightbox) {
                     lightbox.style.display = 'none';
                 }
+            });
+            
+            // Footer edit functionality
+            footerEditToggle.addEventListener('click', function() {
+                if (footerEditForm.style.display === 'block') {
+                    footerEditForm.style.display = 'none';
+                    this.innerHTML = '<i class="fas fa-edit"></i> Edit Footer';
+                } else {
+                    footerEditForm.style.display = 'block';
+                    this.innerHTML = '<i class="fas fa-times"></i> Close Editor';
+                    
+                    // Populate form with current values
+                    editEmail.value = footerEmail.textContent;
+                    editPhone.value = footerPhone.textContent;
+                    editAddress.value = footerAddress.textContent;
+                    editFacebook.value = footerFacebook.href;
+                    editTwitter.value = footerTwitter.href;
+                    editInstagram.value = footerInstagram.href;
+                    editLinkedin.value = footerLinkedin.href;
+                    editGithub.value = footerGithub.href;
+                    editSnapchat.value = footerSnapchat.href;
+                    editYoutube.value = footerYoutube.href;
+                }
+            });
+            
+            // Save footer changes
+            saveFooterBtn.addEventListener('click', function() {
+                footerEmail.textContent = editEmail.value;
+                footerPhone.textContent = editPhone.value;
+                footerAddress.textContent = editAddress.value;
+                footerFacebook.href = ensureHttp(editFacebook.value);
+                footerTwitter.href = ensureHttp(editTwitter.value);
+                footerInstagram.href = ensureHttp(editInstagram.value);
+                footerLinkedin.href = ensureHttp(editLinkedin.value);
+                footerGithub.href = ensureHttp(editGithub.value);
+                footerSnapchat.href = ensureHttp(editSnapchat.value);
+                footerYoutube.href = ensureHttp(editYoutube.value);
+                
+                footerEditForm.style.display = 'none';
+                footerEditToggle.innerHTML = '<i class="fas fa-edit"></i> Edit Footer';
+                
+                alert('Footer changes saved successfully!');
             });
             
             // Generate gallery function
@@ -891,36 +1007,6 @@
                 }
             }
             
-            // Update footer function
-            function updateFooter() {
-                const footerTitle = footerTitleInput.value || 'CONTACT INFORMATION';
-                const email = contactEmailInput.value || 'email@example.com';
-                const phone = contactPhoneInput.value || '(123) 456-7890';
-                const address = contactAddressInput.value || 'Your City, Country';
-                
-                // Update footer content
-                const footerTitleElement = previewFooter.querySelector('.footer-title');
-                footerTitleElement.textContent = footerTitle;
-                
-                const contactItems = previewFooter.querySelectorAll('.contact-item');
-                contactItems[0].querySelector('span').textContent = email;
-                contactItems[1].querySelector('span').textContent = phone;
-                contactItems[2].querySelector('span').textContent = address;
-                
-                // Update social links
-                const socialLinks = previewFooter.querySelectorAll('.social-links a');
-                socialLinks[0].href = socialFacebookInput.value || '#';
-                socialLinks[1].href = socialTwitterInput.value || '#';
-                socialLinks[2].href = socialInstagramInput.value || '#';
-                socialLinks[3].href = socialLinkedinInput.value || '#';
-                socialLinks[4].href = socialGithubInput.value || '#';
-                
-                // Make sure all links open in new tab
-                socialLinks.forEach(link => {
-                    link.target = '_blank';
-                });
-            }
-            
             // Update fonts based on selection
             function updateFonts() {
                 if (selectedFont === 'orbitron') {
@@ -947,8 +1033,310 @@
                 }
             }
             
-            // Initialize with some sample images if needed
-            // document.getElementById('image-links').value = "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80\nhttps://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80\nhttps://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80";
+            // Ensure URLs have http/https prefix
+            function ensureHttp(url) {
+                if (!url) return '#';
+                if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                    return 'https://' + url;
+                }
+                return url;
+            }
+            
+            // Export HTML function
+            function exportHTML() {
+                const title = galleryTitleInput.value || 'MY AWESOME GALLERY';
+                const description = galleryDescInput.value || 'Your gallery description will appear here';
+                const imageLinks = document.getElementById('image-links').value.split('\n').filter(link => link.trim() !== '');
+                
+                // Get title and description colors
+                const titleColor = document.querySelector('.color-option.active[data-type="title"]').getAttribute('data-color');
+                const descColor = document.querySelector('.color-option.active[data-type="desc"]').getAttribute('data-color');
+                
+                // Get selected font
+                const selectedFont = document.querySelector('.font-option.active').getAttribute('data-font');
+                
+                // Generate gallery HTML
+                let galleryHTML = '';
+                for (let i = 0; i < 16; i++) {
+                    if (i < imageLinks.length) {
+                        galleryHTML += `<div class="gallery-item">
+                            <img src="${imageLinks[i]}" alt="Gallery image ${i+1}">
+                        </div>`;
+                    } else {
+                        galleryHTML += '<div class="gallery-item empty"></div>';
+                    }
+                }
+                
+                // Generate final HTML
+                const finalHTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${title}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;500;700&family=Montserrat:wght@300;500;700&family=Raleway:wght@300;500;700&family=Poppins:wght@300;500;700&family=Oxanium:wght@300;500;700&family=Audiowide&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-primary: #00f3ff;
+            --neon-secondary: #ff2d95;
+            --neon-accent: #0ffc33;
+            --neon-alternate: #bf00ff;
+            --neon-highlight: #fffc00;
+            --title-color: #${titleColor};
+            --desc-color: #${descColor};
+            --dark-bg: #0a0a16;
+            --darker-bg: #050510;
+            --card-bg: rgba(16, 18, 36, 0.8);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 70%);
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .gallery-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .gallery-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px var(--title-color);
+            color: var(--title-color);
+            font-family: ${selectedFont === 'orbitron' ? "'Orbitron', sans-serif" : 
+                         selectedFont === 'rajdhani' ? "'Rajdhani', sans-serif" :
+                         selectedFont === 'montserrat' ? "'Montserrat', sans-serif" :
+                         selectedFont === 'raleway' ? "'Raleway', sans-serif" :
+                         selectedFont === 'poppins' ? "'Poppins', sans-serif" :
+                         selectedFont === 'oxanium' ? "'Oxanium', cursive" :
+                         "'Audiowide', cursive"};
+        }
+        
+        .gallery-description {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--desc-color);
+            font-family: ${selectedFont === 'orbitron' ? "'Montserrat', sans-serif" : 
+                         selectedFont === 'rajdhani' ? "'Rajdhani', sans-serif" :
+                         selectedFont === 'montserrat' ? "'Montserrat', sans-serif" :
+                         selectedFont === 'raleway' ? "'Raleway', sans-serif" :
+                         selectedFont === 'poppins' ? "'Poppins', sans-serif" :
+                         selectedFont === 'oxanium' ? "'Oxanium', cursive" :
+                         "'Audiowide', cursive"};
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 1;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gallery-item.empty::before {
+            content: '+';
+            font-size: 2rem;
+            color: var(--neon-primary);
+            opacity: 0.7;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-primary);
+            box-shadow: 0 0 15px var(--neon-primary);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        footer {
+            margin-top: 40px;
+            padding: 25px;
+            background: rgba(10, 12, 28, 0.6);
+            border-radius: 16px;
+            border: 1px solid var(--neon-primary);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+            text-align: center;
+            width: 100%;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--neon-primary);
+            text-shadow: 0 0 10px var(--neon-primary);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .contact-item i {
+            color: var(--neon-accent);
+            font-size: 1.2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .social-links a {
+            color: var(--neon-primary);
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--neon-accent);
+            transform: translateY(-3px);
+            text-shadow: 0 0 10px var(--neon-accent);
+        }
+        
+        @media (max-width: 1200px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="gallery-header">
+            <h2 class="gallery-title">${title}</h2>
+            <p class="gallery-description">${description}</p>
+        </div>
+        
+        <div class="gallery-grid">
+            ${galleryHTML}
+        </div>
+        
+        <footer>
+            <div class="footer-content">
+                <h3 class="footer-title">CONTACT INFORMATION</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>${footerEmail.textContent}</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>${footerPhone.textContent}</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>${footerAddress.textContent}</span>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="${footerFacebook.href}" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="${footerTwitter.href}" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="${footerInstagram.href}" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="${footerLinkedin.href}" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="${footerGithub.href}" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="${footerSnapchat.href}" target="_blank"><i class="fab fa-snapchat-ghost"></i></a>
+                    <a href="${footerYoutube.href}" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>`;
+
+                // Create download link
+                const blob = new Blob([finalHTML], {type: 'text/html'});
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'neon-gallery.html';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                alert('Gallery exported successfully!');
+            }
         });
     </script>
 </body>
